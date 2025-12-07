@@ -4,6 +4,10 @@ class Book:
         self.title = title
         self.author = author
 
+    # Add __str__ method
+    def __str__(self):
+        return f"Book: {self.title} by {self.author}"
+
 
 # Derived Class - EBook
 class EBook(Book):
@@ -11,12 +15,20 @@ class EBook(Book):
         super().__init__(title, author)
         self.file_size = file_size
 
+    # Override __str__ method
+    def __str__(self):
+        return f"EBook: {self.title} by {self.author}, File Size: {self.file_size}KB"
+
 
 # Derived Class - PrintBook
 class PrintBook(Book):
     def __init__(self, title, author, page_count):
         super().__init__(title, author)
         self.page_count = page_count
+
+    # Override __str__ method
+    def __str__(self):
+        return f"PrintBook: {self.title} by {self.author}, Page Count: {self.page_count}"
 
 
 # Library Class (Composition)
@@ -29,9 +41,4 @@ class Library:
 
     def list_books(self):
         for book in self.books:
-            if isinstance(book, EBook):
-                print(f"EBook: {book.title} by {book.author}, File Size: {book.file_size}KB")
-            elif isinstance(book, PrintBook):
-                print(f"PrintBook: {book.title} by {book.author}, Page Count: {book.page_count}")
-            else:
-                print(f"Book: {book.title} by {book.author}")
+            print(book)  # Uses __str__ automatically
